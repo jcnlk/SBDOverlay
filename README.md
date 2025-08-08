@@ -1,5 +1,5 @@
 # SBD
-Skyblock Dungeon Mod made with ChatTriggers. Created by DUNGEONSDUNGEONS.
+Skyblock Dungeon Mod made with ChatTriggers. Originally created by DUNGEONSDUNGEONS.
 
 ## Installation
 Run the command `/ct import sbd` ingame. Requires ChatTriggers to be installed.
