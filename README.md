@@ -23,5 +23,6 @@ Run the command `/ct import sbd` ingame. Requires ChatTriggers to be installed.
 
 * shows missing classes in M4/M6/M7 party finder
 </details>
+
 ## Commands
 - `/sbd` Opens the SBD config.
