@@ -1,4 +1,4 @@
-import { timeToString } from "../../calc";
+import { timeToString } from "../calc";
 
 const urlFunc = (uuid) => `https://sbecommands-api.icarusphantom.dev/v1/sbecommands/cata/${uuid}`;
 

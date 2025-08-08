@@ -1,4 +1,4 @@
-import { timeToString } from "../../calc";
+import { timeToString } from "../calc";
 
 const urlFunc = (uuid) => `https://sky.shiiyu.moe/api/v2/dungeons/${uuid}`;
 

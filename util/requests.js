@@ -1,7 +1,7 @@
 import request from "requestV2";
 
 import Data from "./data";
-import { uuidApis, statsApis } from "./apis/apis";
+import { uuidApis, statsApis } from "./apis";
 import { handleError } from "./error";
 
 const requestAndTransformData = (url, func, headers = { "User-Agent": " Mozilla/5.0", "Content-Type": "application/json" }) => {
