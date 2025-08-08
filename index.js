@@ -1,8 +1,11 @@
-import { registerPartyFinderTriggers } from "./features/partyfinder.js"
-import { autokick } from "./features/autokick.js"
-import { registerSoloClearTriggers } from "./features/soloclear.js"
-import { sbdCommand } from "./commands/sbdcommand.js"
-import { debugCommand } from "./commands/debugcommand.js"
+import "./features/partyfinder";
+import Data from "./util/data";
+import Config from "./Config";
 
-registerPartyFinderTriggers()
-registerSoloClearTriggers()
+register("command", () => Config.openGUI()).setName("sbd").setAliases(["sbdo", "sbdoverlay"]);
+
+register("command", () => {
+  const debugData = JSON.stringify(Data.debug.req, null, 2);
+  console.log(debugData);
+  ChatLib.chat(debugData);
+}).setName("sbdebug");

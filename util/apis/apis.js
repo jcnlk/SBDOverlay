@@ -1,22 +1,21 @@
-import { uuidMojang } from "./uuid/mojang.js"
-import { uuidAshcon } from "./uuid/ashcon.js"
-import { uuidPlayerDB } from "./uuid/playerdb.js"
+import { statsSbdCf, statsSbdAz } from "./stats/sbd";
+import { statsSBE } from "./stats/sbecommands";
+import { statsSkyCrypt } from "./stats/skycrypt";
 
-import { statsSbdCf, statsSbdAz } from "./stats/sbd.js"
-import { statsSBE } from "./stats/sbecommands.js"
-import { statsSkyCrypt } from "./stats/skycrypt.js"
+const playerDBUrlFunc = (name) => `https://playerdb.co/api/player/minecraft/${name}`;
+const transformPlayerDBFunc = (data) => data.data.player.raw_id;
 
-const uuidApis = [
-    uuidPlayerDB,
-    uuidMojang,
-    uuidAshcon,
-]
+const uuidPlayerDB = { urlFunc: playerDBUrlFunc, transformFunc: transformPlayerDBFunc, key: "uuid-pdb" };
 
-const statsApis = [
-    statsSbdAz,
-    statsSbdCf,
-    statsSBE,
-    statsSkyCrypt,
-]
+const mojangUrlFunc = (name) => `https://api.mojang.com/users/profiles/minecraft/${name}`;
+const transformMojangFunc = (data) => data.id;
 
-module.exports = { uuidApis, statsApis }
+const uuidMojang = { urlFunc: mojangUrlFunc, transformFunc: transformMojangFunc, key: "uuid-mojang" };
+
+const ashconUrlFunc = (name) => `https://api.ashcon.app/mojang/v2/user/${name}`;
+const transformAshconFunc = (data) => data.uuid.replace(/-/g, "");
+
+const uuidAshcon = { urlFunc: ashconUrlFunc, transformFunc: transformAshconFunc, key: "uuid-ash" };
+
+export const uuidApis = [uuidPlayerDB, uuidMojang, uuidAshcon];
+export const statsApis = [statsSbdAz, statsSbdCf, statsSBE, statsSkyCrypt];

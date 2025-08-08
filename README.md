@@ -23,14 +23,5 @@ Run the command `/ct import sbd` ingame. Requires ChatTriggers to be installed.
 
 * shows missing classes in M4/M6/M7 party finder
 </details>
-<details>
-<summary>Solo Clear Tracker</summary>
-
-* track all of your solo clear times
-* show stats of your clears
-</details>
-
 ## Commands
 - `/sbd` Opens the SBD config.
-- `/topsoloclears <floor> <amount>` Shows your top solo clear times
-- `/soloclearstats <floor>` Shows your solo clear stats
