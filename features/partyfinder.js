@@ -1,11 +1,10 @@
-import { decodeNumeral } from "BloomCore/utils/Utils";
+import { decodeNumeral, registerWhen } from "BloomCore/utils/Utils";
 
 import Config from "../Config";
 import Data from "../util/data";
 import PartyMember from "../util/partymember";
 
-register("itemTooltip", (lore, item) => {
-  if (!Config.partyfinder && !Config.missingclasses) return;
+registerWhen(register("itemTooltip", (lore, item) => {
   const itemName = lore[0];
   lore = lore.slice(1);
   lore = lore.filter((x) => !/minecraft:/.test(x) && !/NBT:/.test(x));
@@ -14,13 +13,13 @@ register("itemTooltip", (lore, item) => {
   const dungeonType = getDungeonType(lore);
   let hasChanged = false;
 
-  if (Config.missingclasses && dungeonType == "master_catacombs" && [4, 6, 7].includes(floor) && !hasMissingClasses(lore)) { // TODO: Change this to all floors
+  if (((Config.missingclassesfloor && dungeonType == "master_catacombs" && [4,6,7].includes(floor)) || (!Config.missingclassesfloor && [1,2,3,4,5,6,7].includes(floor))) && !hasMissingClasses(lore)) {
     const missingClasses = getMissingClasses(lore);
+    lore.push(""); // empty line so it looks less ugly
     lore.push(`§e§lMissing:§r§f ${missingClasses.join(", ")}`);
     item.setLore(lore);
   }
 
-  if (!Config.partyfinder) return;
   lore = lore.map((x) => {
     if (!/§5§o §\w\w+§f: §\w\w+§b/.test(x)) return x.replace(/§5§o/, "");
 
@@ -36,7 +35,7 @@ register("itemTooltip", (lore, item) => {
     return createSuffix(x, player, floor, dungeonType);
   });
   if (hasChanged) item.setLore(lore);
-});
+}), () => Config.partyfinder && Config.missingclasses);
 
 const hasMissingClasses = (lore) => lore.some((x) => /Missing:§r/.test(x));
 const hasCustomSuffix = (msg) => /§0§r§r/.test(msg);
